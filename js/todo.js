@@ -4,7 +4,7 @@ const toDoList = document.getElementById("todo-list");
 
 const TODOS_KEY = "todos";
 
-const toDos = [];
+let toDos = [];
 
 function saveToDos() {
     localStorage.setItem(TODOS_KEY, JSON.stringify(toDos)); // JSON.stringify으로 string 으로 변경
@@ -42,5 +42,6 @@ const savedToDos = localStorage.getItem(TODOS_KEY);
 
 if (saveToDos !== null) {
     const parsedToDos = JSON.parse(savedToDos); // JSON.parse은 string을 array로 만듬
-    parsedToDos.forEach((item) => console.log("this is the turn", item));
+    toDos = parsedToDos; // toDos array에 localStorage에 저장된 내용 전달
+    parsedToDos.forEach(paintToDo);
 }
