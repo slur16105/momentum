@@ -1,19 +1,15 @@
 const loginForm = document.querySelector("#login-form");
-const loginButton = document.querySelector("#login-form button");
+const loginInput = document.querySelector("#login-form input");
+const greeting = document.querySelector("#greeting");
 
-const link = document.querySelector("a");
+const HIDDEN_CLASSNAME = "hidden";
 
 function onLoginSubmit(event) {
     event.preventDefault(); // sumit의 새로고침되는 기본 기능을 막기 위해 사용
-    console.log(loginButton.value);
-}
-
-// a링크의 기본 이벤트 로그로 확인
-// preventDefault를 이해하기
-function handleLinkClick(event) {
-    event.preventDefault();
-    console.log(event);
+    loginForm.classList.add(HIDDEN_CLASSNAME);
+    const username = loginInput.value;
+    greeting.innerText = `Hello ${username}`;
+    greeting.classList.remove(HIDDEN_CLASSNAME);
 }
 
 loginForm.addEventListener("submit", onLoginSubmit);
-link.addEventListener("click", handleLinkClick);
