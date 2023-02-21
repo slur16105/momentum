@@ -8,6 +8,7 @@ function onLoginSubmit(event) {
     event.preventDefault(); // sumit의 새로고침되는 기본 기능을 막기 위해 사용
     loginForm.classList.add(HIDDEN_CLASSNAME);
     const username = loginInput.value;
+    localStorage.setItem("username", username);
     greeting.innerText = `Hello ${username}`;
     greeting.classList.remove(HIDDEN_CLASSNAME);
 }
