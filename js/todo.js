@@ -2,6 +2,12 @@ const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
 
+const toDos = [];
+
+function saveToDos() {
+    localStorage.setItem("todos", JSON.stringify(toDos)); // JSON.stringify으로 string 으로 변경
+}
+
 function deleteToDo(event) { // 인자에 event로 click 정보를 볼 수 있다.
     const li = event.target.parentElement;
     li.remove();
@@ -23,7 +29,9 @@ function handleToDoSubmit(event) {
     event.preventDefault();
     const newTodo = toDoInput.value; // input의 현재 value를 새로운 변수에 복사
     toDoInput.value = "";
-    paintToDo(newTodo); // paintToDo 함수에 value 전달
+    toDos.push(newTodo); // toDos array에 전달
+    paintToDo(newTodo); // paintToDo 함수에 value 전달 화면에 표시
+    saveToDos(); // toDos array를 localStorage에 저장
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
