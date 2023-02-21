@@ -17,8 +17,9 @@ function deleteToDo(event) { // 인자에 event로 click 정보를 볼 수 있�
 
 function paintToDo(newTodo) {
     const li = document.createElement("li"); // li 태그 생성
+    li.id = newTodo.id;
     const span = document.createElement("span"); // span 태그 생성
-    span.innerText = newTodo; // 인자로 받아온 newTodo value를 span 내부에 추가
+    span.innerText = newTodo.text; // 인자로 받아온 newTodo value를 span 내부에 추가
     const button = document.createElement("button"); // button 태그 생성
     button.innerText = "X";
     button.addEventListener("click", deleteToDo);
@@ -31,8 +32,12 @@ function handleToDoSubmit(event) {
     event.preventDefault();
     const newTodo = toDoInput.value; // input의 현재 value를 새로운 변수에 복사
     toDoInput.value = "";
-    toDos.push(newTodo); // toDos array에 전달
-    paintToDo(newTodo); // paintToDo 함수에 value 전달 화면에 표시
+    const newTodoObj = { // object 로 저장
+        text: newTodo,
+        id: Date.now(),
+    }
+    toDos.push(newTodoObj); 
+    paintToDo(newTodoObj); // paintToDo 함수에 value 전달 화면에 표시
     saveToDos(); // toDos array를 localStorage에 저장
 }
 
